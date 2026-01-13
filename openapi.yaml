@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  title: API comme cadre applicatif du DevOps
+  description: |
+    API de credit scoring basée sur un modèle AutoML. Cette API est conçue dans le cadre du projet DevOps pour les étudiants de Master 1 Informatique parcours IA à l'Université du Mans.
+  contact:
+    email: aghilas.sini@univ-lemans.fr
+  license:
+    name: CeCILL 2.1
+    url: https://cecill.info/licences/Licence_CeCILL_V2.1-en.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/liumunivlemans/automl-api/1.0.0
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:8000
+  description: Local development server
+paths:
+  /health:
+    get:
+      summary: Vérifier l'état de l'API
+      responses:
+        "200":
+          description: API opérationnelle
+  /predict:
+    post:
+      summary: Évaluer une demande de crédit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreditRequest"
+        required: true
+      responses:
+        "200":
+          description: Décision de crédit
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreditResponse"
+        "400":
+          description: Requête invalide
+        "500":
+          description: Erreur interne du serveur
+  /model/info:
+    get:
+      summary: Informations sur le modèle AutoML
+      responses:
+        "200":
+          description: Métadonnées du modèle
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModelInfo"
+components:
+  schemas:
+    CreditRequest:
+      required:
+      - age
+      - credit_amount
+      - duration
+      - income
+      type: object
+      properties:
+        age:
+          type: integer
+          example: 35
+        income:
+          type: number
+          example: 3200
+        credit_amount:
+          type: number
+          example: 15000
+        duration:
+          type: integer
+          description: Durée du crédit en mois
+          example: 48
+    CreditResponse:
+      type: object
+      properties:
+        decision:
+          type: string
+          example: APPROVED
+          enum:
+          - APPROVED
+          - REJECTED
+        probability:
+          type: number
+          format: float
+          example: 0.82
+        model_version:
+          type: string
+          example: credit_scoring_model_v1
+    ModelInfo:
+      type: object
+      properties:
+        model_name:
+          type: string
+          example: Credit Scoring AutoML
+        algorithm:
+          type: string
+          example: AutoML (FLAML)
+        version:
+          type: string
+          example: "1.0"

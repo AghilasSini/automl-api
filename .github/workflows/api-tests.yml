@@ -1,0 +1,11 @@
+name: API Tests
+   on: [push]
+   jobs:
+     test:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v2
+         - name: Build Docker image
+           run: docker build -t api .
+         - name: Run tests
+           run: docker run api pytest tests/
