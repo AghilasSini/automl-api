@@ -7,17 +7,15 @@ API REST pour l'évaluation automatique de demandes de crédit, basée sur un mo
 
 Cette API permet d'évaluer des demandes de crédit en temps réel en utilisant un modèle de machine learning. Elle retourne une décision (APPROVED/REJECTED) accompagnée d'une probabilité d'approbation.
 
-**Contexte académique :** Projet DevOps pour Master 1 Informatique - Parcours IA - Université du Mans
-
 ##  Fonctionnalités
 
-- ✅ Évaluation de demandes de crédit en temps réel
-- ✅ API REST conforme aux standards OpenAPI 3.0
-- ✅ Validation des données entrantes (Pydantic)
-- ✅ Gestion d'erreurs robuste
-- ✅ Conteneurisation Docker
-- ✅ Tests unitaires et d'intégration
-- ✅ Documentation interactive (Swagger UI)
+- Évaluation de demandes de crédit en temps réel
+- API REST conforme aux standards OpenAPI 3.0
+- Validation des données entrantes (Pydantic)
+- Gestion d'erreurs robuste
+- Conteneurisation Docker
+- Tests unitaires et d'intégration
+- Documentation interactive (Swagger UI)
 
 ##  Architecture
 ````bash
